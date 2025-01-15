@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Principal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+        }
+        header h1 {
+            margin: 0;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            padding: 20px;
+        }
+        .flash-message {
+            color: green;
+            background-color: #d4edda;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        .flash-message.danger {
+            color: red;
+            background-color: #f8d7da;
+        }
+        .message-container {
+            background-color: #e3f2fd;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 18px;
+            border: 1px solid #90caf9;
+            border-radius: 5px;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Bem-vindo ao DermaScan</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('index') }}">Inicial</a></li>
+                <li><a href="{{ url_for('cadastro') }}">Cadastro</a></li>
+                <li><a href="{{ url_for('envio') }}">Envio de Imagens</a></li>
+                <li><a href="{{ url_for('historico_view') }}">Histórico</a></li>
+                <li><a href="{{ url_for('resultado', id=1) }}">Resultado</a></li>
+                <li><a href="{{ url_for('ajuda') }}">Ajuda</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash-message {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <!-- Mensagem na parte inferior da tela -->
+        <div class="message-container">
+            <p>Você está na página inicial do DermaScan. Selecione uma das opções do menu para começar!</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 DermaScan. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>
